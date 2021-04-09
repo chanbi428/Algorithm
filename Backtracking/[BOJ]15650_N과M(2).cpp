@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int n, m, ch[10];
+vector<int>res;
+
+void seq(int num, int index){
+	if(num==m){
+		for(int i=0;i<m;i++){
+			cout<<res[i]<<" ";
+		}
+		cout<<"\n";
+		return;
+	}
+	for(int i=index+1;i<=n;i++){
+		if(ch[i]==0){
+			ch[i]=1;
+			res.push_back(i);
+			seq(num+1, i);
+			ch[i]=0;
+			res.pop_back();
+		}
+	}
+}
+
+int main(int argc, char** argv) {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+//	freopen("input.txt", "rt", stdin);
+
+	cin>>n>>m;
+	seq(0,0);
+		
+	return 0;
+}
