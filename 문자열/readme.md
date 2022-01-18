@@ -35,3 +35,7 @@ String tmp = new StringBuilder(str) ⇒ string은 불변, 연산이 많아질수
 문자가 숫자인지 확인 → Character.isDigit(c);
 
 이진수 문자열을 숫자로 변경 → Integer.parseInt(str, 2);
+
+StringTokenizer
+  - nextToken() → 다음 토큰 가져오기
+  - countTokens() → 토큰 갯수 리턴
