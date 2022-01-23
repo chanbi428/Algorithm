@@ -1,3 +1,4 @@
+# Set : 중복제거
 # TreeSet : 중복제거하고 정렬도 가능
 
 TreeSet<Integer> Tset = new TreeSet<>();
