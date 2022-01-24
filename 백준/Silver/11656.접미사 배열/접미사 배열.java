@@ -4,7 +4,7 @@ import java.io.*;
 public class Main {
 	public static void main(String[] args) throws Exception{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder str = new StringBuilder(br.readLine());
+		String str = br.readLine();
 		br.close();
 		int len = str.length();
 		String[] arr = new String[len];
