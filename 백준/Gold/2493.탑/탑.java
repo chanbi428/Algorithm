@@ -3,32 +3,24 @@ import java.io.*;
 
 
 public class Main {	
-	static class Top{
-		int h, index;
-		Top(int h, int index){
-			this.h = h;
-			this.index = index;
-		}
-	}
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
 		
 		int n = Integer.parseInt(br.readLine());
-		Stack<Top> stack = new Stack<>();
-		int[] tops = new int[n];
+		Stack<int[]> stack = new Stack<>();
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		for(int i=0; i<n; i++) {
-			tops[i] = Integer.parseInt(st.nextToken());
+		for(int i=1; i<=n; i++) {
+			int height = Integer.parseInt(st.nextToken());
 			while(!stack.empty()) {
-				if(stack.peek().h<tops[i]) {
+				if(stack.peek()[1]<height) {
 					stack.pop();
 				} 
 				else break;
 			}
-			if(!stack.empty()) sb.append(stack.peek().index+1+" ");
+			if(!stack.empty()) sb.append(stack.peek()[0]+" ");
 			else sb.append("0 ");
-			stack.push(new Top(tops[i], i));
+			stack.push(new int[] {i, height});
 		}
 		System.out.println(sb);
 		
