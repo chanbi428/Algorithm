@@ -1,18 +1,18 @@
 import java.io.*;
 
 public class Main {
-		
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int n = Integer.parseInt(br.readLine());
 		int answer = 0;
-		for(int i=6; i>=0; i--) {
-			if(n-(1<<i)>=0) {
-				n = n-(1<<i);
+		int tmp = 64;
+		while(n>0) {
+			if(n-tmp>=0) {
 				answer++;
+				n -= tmp;
 			}
-			if(n==0) break;
+			tmp /= 2;
 		}
 		System.out.println(answer);
-	}
+	}	
 }
