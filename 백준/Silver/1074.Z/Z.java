@@ -8,31 +8,21 @@ public class Main {
 	
 	static void visit(int n, int x, int y) {
 		if(flag) return;
+		
+		int tmp = 1<<n;
+		if(r<x || r>=x+tmp || c<y || c>=y+tmp) {
+			answer += tmp*tmp;
+			return;
+		}
+		
 		if(n==0) {
 			flag = true;
 			return;
 		}
-		int tmp = 1<<(n-1);
-		if(r>=x && r<x+tmp && c>=y && c<y+tmp) {
-			visit(n-1, x, y);
-			return;
-		}
-		else answer += tmp*tmp;
-		if(r>=x && r<x+tmp && c>=y+tmp && c<y+tmp*2) {
-			visit(n-1, x, y+tmp);
-			return;
-		}
-		else answer += tmp*tmp;
-		if(r>=x+tmp && r<x+tmp*2 && c>=y && c<y+tmp) {
-			visit(n-1, x+tmp, y);
-			return;
-		}
-		else answer += tmp*tmp;
-		if(r>=x+tmp && r<x+tmp*2 && c>=y+tmp && c<y+tmp*2) {
-			visit(n-1, x+tmp, y+tmp);
-			return;
-		}
-		else answer += tmp*tmp;
+		visit(n-1, x, y);
+		visit(n-1, x, y+tmp/2);
+		visit(n-1, x+tmp/2, y);
+		visit(n-1, x+tmp/2, y+tmp/2);
 	
 	}
 	
