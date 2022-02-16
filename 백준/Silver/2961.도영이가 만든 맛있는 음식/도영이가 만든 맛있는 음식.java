@@ -7,11 +7,10 @@ public class Main {
 	static int[][] ingre;
 	
 	static void comb(int index, int sour, int bitter) {
-		if(index != 0) answer = Math.min(answer, Math.abs(sour-bitter));
+		if(!(sour==1 && bitter==0)) answer = Math.min(answer, Math.abs(sour-bitter));
 		if(index == n) return;
-		for(int i=index; i<n; i++) {
-			comb(i+1, sour*ingre[i][0], bitter+ingre[i][1]);
-		}
+		comb(index+1, sour*ingre[index][0], bitter+ingre[index][1]);
+		comb(index+1, sour, bitter);
 	}
 
 	public static void main(String[] args) throws Exception {
