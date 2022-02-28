@@ -17,9 +17,11 @@ public class Main {
 		}
 		
 		if(np()) {
+			StringBuilder sb = new StringBuilder();
 			for(int x: num) {
-				System.out.print(x+" ");
+				sb.append(x+" ");
 			}
+			System.out.println(sb.toString());
 		} else System.out.println("-1");
 	}
 	static boolean np() {
