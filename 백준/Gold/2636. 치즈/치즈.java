@@ -40,7 +40,7 @@ public class Main{
 		boolean[][] visited = new boolean[n][m];
 		visited[0][0] = true;
 		Queue<int[]> a = new ArrayDeque<>();
-		Queue<int[]> Q = new ArrayDeque<>();
+		int tmp = 0;
 		a.offer(new int[] {0, 0});
 		while(!a.isEmpty()) {
 			int[] t = a.poll();
@@ -50,13 +50,13 @@ public class Main{
 				if(x<0 || x>=n || y<0 || y>=m || visited[x][y]) continue;
 				if(cheese[x][y]==0) a.offer(new int[] {x, y});
 				else {
-					Q.offer(new int[] {x, y, 1});
+					tmp++;
 					cheese[x][y] = 0;
 				}
 				visited[x][y] = true;
 			}
 		}
-		return Q.size();
+		return tmp;
 	}
 
 }
