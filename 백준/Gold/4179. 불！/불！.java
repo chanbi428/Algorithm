@@ -49,7 +49,7 @@ public class Main{
 				int xx = tmp[0] + dx[i];
 				int yy = tmp[1] + dy[i];
 				if(xx<0 || xx>=r || yy<0 || yy>=c) return tmp[2];
-				if((xx==0 || xx==r-1 || yy==0 || yy==c-1) && miro[xx][yy]=='.') return tmp[2]+1;
+				//if((xx==0 || xx==r-1 || yy==0 || yy==c-1) && miro[xx][yy]=='.') return tmp[2]+1;
 				if(visited[xx][yy] || miro[xx][yy]!='.') continue;
 				visited[xx][yy] = true;
 				Q.offer(new int[] {xx, yy, tmp[2]+1});
