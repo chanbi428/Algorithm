@@ -17,7 +17,7 @@ public class Main {
 			if(cnt.containsKey(num[i])) cnt.replace(num[i], cnt.get(num[i])+1);
 			else cnt.put(num[i], 1);
 		}
-		Arrays.sort(num);
+		//Arrays.sort(num);
 		
 		int answer = 0;
 		for(int i=0; i<n; i++) {
