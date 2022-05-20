@@ -1,47 +1,40 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
-//커플만들기 - dp
 public class Main {
+	
+	static int n, m;
+	static int[] men, women;
+	static int[][] dp;
+	
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		men = new int[n];
+		women = new int[m];
+		dp = new int[n+1][m+1];
+		
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++) men[i] = Integer.parseInt(st.nextToken());
 
-    public static void main(String[] args) {
-        Scanner s = new Scanner(System.in);
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<m; i++) women[i] = Integer.parseInt(st.nextToken());
+		
+		Arrays.sort(men);
+		Arrays.sort(women);
+		
+		for(int i=1; i<=n; i++) {
+			for(int j=1; j<=m; j++) {
+				dp[i][j] = dp[i-1][j-1]+Math.abs(men[i-1]-women[j-1]);
+				if(i<j) dp[i][j] = Math.min(dp[i][j], dp[i][j-1]);
+				else if(i>j) dp[i][j] = Math.min(dp[i][j], dp[i-1][j]);
+			}
+		}
+		
+		System.out.println(dp[n][m]);
+	}
 
-        int n = s.nextInt(); //남자
-        int m = s.nextInt(); //여자
-
-        int[][] dp = new int[n + 1][m + 1];
-        int[] man = new int[n];
-        int[] woman = new int[m];
-
-        for (int i = 0; i < n; i++) {
-            man[i] = s.nextInt();
-        }
-
-        for (int i = 0; i < m; i++) {
-            woman[i] = s.nextInt();
-        }
-
-        Arrays.sort(man);
-        Arrays.sort(woman);
-
-        //맨 처음 값은 현재 성격 차이 값만 저장되도록 dp[0][0]은 0값 유지
-        for (int i = 1; i <= man.length; i++) {
-            for (int j = 1; j <= woman.length; j++) {
-                //이전 값 + 현재 성격 차이 값
-                dp[i][j] = dp[i - 1][j - 1] + Math.abs(man[i - 1] - woman[j - 1]);
-
-                if (i > j) { //남자가 여자보다 많을 때
-                    dp[i][j] = Math.min(dp[i][j], dp[i - 1][j]);
-                }
-
-                if (i < j) { //여자가 남자보다 많을 때
-                    dp[i][j] = Math.min(dp[i][j], dp[i][j - 1]);
-                }
-
-            }
-        }
-
-        System.out.println(dp[n][m]);
-    }
 }
