@@ -13,13 +13,10 @@ public class Main {
 		int min = 0;
 		int cnt = 0;
 		
-		for(int i=0; i<n; i++) {
+		for(int i=0; i<n/2; i++) {
+			stone[0][Integer.parseInt(br.readLine())]++;
 			int k = Integer.parseInt(br.readLine());
-			if(i%2==0) {
-				stone[0][k]++;
-			} else {
-				stone[1][h-k+1]++;
-			}
+			stone[1][h-k+1]++;
 		}
 		
 		for(int i=h-1; i>0; i--) stone[0][i] += stone[0][i+1];
