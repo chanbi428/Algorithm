@@ -31,6 +31,7 @@ public class Main {
 					int sum = snow[s] + snow[e];
 					int dif = Math.abs(tall-sum);
 					answer = Math.min(answer, dif);
+					if(answer == 0) break;
 					
 					if(tall>sum) s++;
 					else e--;
