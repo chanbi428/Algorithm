@@ -9,9 +9,6 @@ class Solution {
         Queue<Integer> Q3 = new ArrayDeque<>();
         Queue<Integer> Q4 = new ArrayDeque<>();
         
-        Queue<Integer> originQ1 = new ArrayDeque<>();
-        Queue<Integer> originQ2 = new ArrayDeque<>();
-        
         long total = 0;
         long sum1 = 0;
         long sum2 = 0;
@@ -20,14 +17,12 @@ class Solution {
             sum1 += i;
             Q1.offer(i);
             Q3.offer(i);
-            originQ1.offer(i);
         }
         for(int i : queue2){
             total += i;
             sum2 += i;
             Q2.offer(i);
             Q4.offer(i);
-            originQ2.offer(i);
         }
         
         long middle = total/2;
