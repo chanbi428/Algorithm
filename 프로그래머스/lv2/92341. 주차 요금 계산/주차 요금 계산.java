@@ -3,62 +3,53 @@ import java.util.*;
 class Solution {
     public int[] solution(int[] fees, String[] records) {
         
-        Set<String> cars = new TreeSet<>();
-        Map<String, int[]> inout = new HashMap<>();
         Map<String, Integer> times = new HashMap<>();
+        Set<String> cars = new TreeSet<>();
+        Map<String, String> state = new HashMap<>();
+        Map<String, Integer> inTime = new HashMap<>();
         
         for(int i=0; i<records.length; i++){
             StringTokenizer st = new StringTokenizer(records[i]);
-            String time = st.nextToken();
-            String carNum = st.nextToken();
-            String io = st.nextToken();
+            int time = minutes(st.nextToken());
+            String car = st.nextToken();
+            String inout = st.nextToken();
+            if(!times.containsKey(car)){
+                times.put(car, 0);
+            }
             
-            if(io.equals("IN")){
-                cars.add(carNum);
-                inout.put(carNum, new int[]{minutes(time), 0});
-            } else{
-                int inTime = inout.get(carNum)[0];
-                int outTime = minutes(time);
-                
-                int t = outTime - inTime;
-                
-                if(times.containsKey(carNum)){
-                    times.put(carNum, times.get(carNum)+t);
-                } else{
-                    times.put(carNum, t);
-                }
-                
-                inout.put(carNum, new int[]{outTime, 1});
+            if(inout.equals("IN")){
+                cars.add(car);
+                inTime.put(car, time);
+            } else {
+                times.put(car, times.get(car) + (time-inTime.get(car)));
+            }
+            state.put(car, inout);
+        }
+        
+        for(String car : state.keySet()){
+            if(state.get(car).equals("IN")){
+                times.put(car, times.get(car) + (1439-inTime.get(car)));
             }
         }
         
         int[] answer = new int[cars.size()];
-        
-        int i = 0;
-        Iterator<String> it = cars.iterator();
-        while(it.hasNext()){
-            String carNum = it.next();
-            if(inout.get(carNum)[1]==0){
-                int inTime = inout.get(carNum)[0];
-                int outTime = 1439;
-                
-                int t = outTime - inTime;
-                
-                if(times.containsKey(carNum)) times.put(carNum, times.get(carNum)+t);
-                else times.put(carNum, t);
-            }
+        Iterator<String> iterator = cars.iterator();
+        int index = 0;
+        while(iterator.hasNext()) {
+            String car = iterator.next();
+            int time = times.get(car);
             
-            int t = times.get(carNum);
-            int money = fees[1];
-            if(t>fees[0]){  // 기본요금아닐 때 추가 
-                t = t-fees[0];
-                if(t%fees[2]==0){
-                    money += fees[3]*(t/fees[2]);
+            answer[index] = fees[1];
+            if(time>fees[0]){
+                time -= fees[0];
+                if(time%fees[2]==0){
+                    answer[index] += (time/fees[2])*fees[3];
                 } else{
-                    money += fees[3]*(t/fees[2]+1);
+                    answer[index] += (time/fees[2]+1)*fees[3];
                 }
             }
-            answer[i++] = money;
+            
+            index++;
         }
         
         return answer;
